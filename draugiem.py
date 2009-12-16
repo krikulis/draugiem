@@ -3,11 +3,12 @@ try:
 except ImportError:
     import simplejson as json 
 
+import urllib
 
-BASE_URL = ""
+BASE_URL = "http://api.draugiem.lv/json/?%s"
 """ draugiem.lv api base key """
 
-class DraugiemAPIException(Exception):
+class DraugiemAPIError(Exception):
     """ describes draugiem.lv api exceptions """
     pass
 
@@ -25,13 +26,22 @@ class DraugiemAPI:
        """
        self.__api_key = api_key
        self.user_key = user_key
-    def __call(**kwargs):
+    def call(self, **kwargs):
         """ 
             Draugiem.lv API JSON call abstractor 
             Keyword arguments are converted to 
-            URL arguments
+            URL arguments. Return converted response
+            or raise DraugiemAPIError on error
         """
-        pass
+        if self.user_key is not None:
+            kwargs['apikey'] = self.user_key
+        kwargs['app'] = self.__api_key
+        arguments = urllib.urlencode(kwargs)
+        response = urllib.urlopen(BASE_URL % arguments).read()
+        response = json.loads(response)
+        if 'error' in response:
+            raise DraugiemAPIError(response['error'])
+        return response
     def begin_authorization(self, email):
         """ 
             begin api authorization procedure
