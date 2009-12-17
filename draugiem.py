@@ -78,7 +78,11 @@ class api:
            for available counters see 
            http://www.draugiem.lv/development/?view=docs#d57e347
         """
-        return True
+        result = self.call(action = "counters")
+        if(counter is not None):
+            return result['counters'].get(counter, 0)
+        else:
+            return result['counters']
     def login_info(self):
         """
           return user profile information 
