@@ -87,7 +87,7 @@ class api:
         """
           return user profile information 
         """
-        pass
+        return self.call(action = "login")['login']
     def events(self, my = True, friend = True, type = None, timestamp = None):
         """ 
           get last 15 activities  
