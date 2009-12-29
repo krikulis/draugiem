@@ -137,5 +137,7 @@ class api:
           `limit` = users per page
           `just_id` = return just ids
         """
-        pass
+        if just_id is False:
+            just_id = None
+        return self.call(action = "app_friends", show = just_id, page = page, limit = limit)
 
