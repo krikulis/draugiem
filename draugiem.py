@@ -36,6 +36,8 @@ class api:
         if self.user_key is not None:
             kwargs['apikey'] = self.user_key
         kwargs['app'] = self.__api_key
+        not_null = lambda item: item[1] is not None
+        kwargs = dict(filter(not_null, kwargs.items()))
         arguments = urllib.urlencode(kwargs)
         response = urllib.urlopen(BASE_URL % arguments).read()
         response = json.loads(response)
@@ -88,21 +90,30 @@ class api:
           return user profile information 
         """
         return self.call(action = "login")['login']
-    def events(self, my = True, friend = True, type = None, timestamp = None):
+    def events(self, only_my = False, type = None, timestamp = None):
         """ 
           get last 15 activities  
-          argument `my` controls owner activity display 
-          argument `friend` controls friend activity display 
+          argument `only_my` controls friend activity display 
           argument `type` is list of displayed types - see `get_event_types` for
           supported types
           timestamp - date from to display user activities
         """
-        pass 
-    def get_event_types(self):
+        args = {}
+        if only_my == True:
+            show = "my"
+        else:
+            show = "friends"
+        if(type):
+            types = ",".join(type)
+        else:
+            types = None
+        return self.call(action = "activities", show = show, types = types, timestamp = timestamp)['events']
+
+    def event_types(self):
         """
           return list of available event types 
         """
-        pass
+        return self.call(action = "event_types")['eventtypes']
     def messages(self, unread = False):
         """ 
           return last messages.
