@@ -116,12 +116,20 @@ class api:
         return self.call(action = "event_types")['eventtypes']
     def messages(self, unread = False):
         """ 
-          return last messages.
+          return list of messages
           only headings are available
           argument `unread` controls whenever 
           to read just unread messages
         """
-        pass
+        if unread is False:
+            unread = None
+        messages = self.call(action = "messages", show = unread)
+        message_list = []
+        for message in messages['messages'].items():
+            message_list.append(dict(message[1]))
+        for message in message_list:
+            message['user'] = messages['users'][message['uid']]
+        return message_list
     def app_friends(self, page = 1, limit = 20, just_id = False):
         """
           return user friends, who are using same application
