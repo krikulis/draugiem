@@ -140,4 +140,3 @@ class api:
         if just_id is False:
             just_id = None
         return self.call(action = "app_friends", show = just_id, page = page, limit = limit)
-
