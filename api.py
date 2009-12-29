@@ -12,9 +12,9 @@ class DraugiemAPIError(Exception):
     """ describes draugiem.lv api exceptions """
     pass
 
-class api:
+class apiBase:
     """ 
-        Draugiem.lv API wrapper  
+        Draugiem.lv API wrapper base class  
         Attribute `user_key` defines user authorized api session key 
     """
     user_key = None
@@ -44,6 +44,10 @@ class api:
         if 'error' in response:
             raise DraugiemAPIError(response['error'])
         return response
+
+    class api:
+        """ draugiem.lv api wrapper """
+    
     def begin_authorization(self, email):
         """ 
             begin api authorization procedure
