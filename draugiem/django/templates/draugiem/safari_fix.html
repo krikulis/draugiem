@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Safari IFrame Cookie Fix</title>
+    </head>
+    <body>
+        <form name="cookie_fix" method="get" action="">
+            {% for item, key in get.items %}
+                <input type="hidden" name="{{ item }}" value="{{ key }}" />
+            {% endfor %}
+            <input type="hidden" name="cookie_fix" value="1" />
+            <noscript><input type="submit" value="Continue" /></noscript>
+        </form>
+        <script type="text/javascript">document.cookie_fix.submit();</script>
+
+    
+    </body>
+</html>
