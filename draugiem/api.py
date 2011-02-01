@@ -8,7 +8,7 @@ import urllib
 BASE_URL = "https://api.draugiem.lv/json/?%s"
 """ draugiem.lv api base key """
 
-class DraugiemAPIError(Exception):
+class APIError(Exception):
     """ describes draugiem.lv api exceptions """
     pass
 
@@ -42,7 +42,7 @@ class BaseAPI:
         response = urllib.urlopen(BASE_URL % arguments).read()
         response = json.loads(response)
         if 'error' in response:
-            raise DraugiemAPIError(response['error'])
+            raise APIError(response['error'])
         return response
 
 class api(BaseAPI):
