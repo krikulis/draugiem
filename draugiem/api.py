@@ -5,7 +5,7 @@ except ImportError:
 
 import urllib
 
-BASE_URL = "http://api.draugiem.lv/json/?%s"
+BASE_URL = "https://api.draugiem.lv/json/?%s"
 """ draugiem.lv api base key """
 
 class DraugiemAPIError(Exception):
@@ -48,33 +48,6 @@ class BaseAPI:
 class api(BaseAPI):
     """ draugiem.lv api wrapper """
     
-    def begin_authorization(self, email):
-        """ 
-            begin api authorization procedure
-            return api authorization request key 
-        """
-        authcode = self.call(action = "authorize", email = email)['authcode']
-        self.__authcode = authcode
-        return authcode
-    def finish_authorization(self, key = None, **kwargs):
-        """
-           finish authorization and return 
-           permament user authorized session api 
-           key
-           Argument `key` respresents authorization
-           request key, if it not given, last
-           authorization request key is used 
-           keyword argument - userinfo . If True, user information 
-           also included in response
-        """
-        if key is None:
-            key = self.__authcode
-        result = self.call(action = "authorize", code = key)
-        self.user_key = result['apikey']
-        if 'userinfo' in kwargs and kwargs['userinfo'] == True:
-            return result
-        else: 
-            return result['apikey']
     def counters(self, counter = None):
         """ 
            return user profile counters 
