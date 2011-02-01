@@ -47,7 +47,8 @@ class BaseAPI:
 
 class api(BaseAPI):
     """ draugiem.lv api wrapper """
-    
+    def authorize(self, user_key):
+        return self.call(action = "authorize", code = user_key)
     def counters(self, counter = None):
         """ 
            return user profile counters 
