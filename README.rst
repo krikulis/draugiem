@@ -1,7 +1,8 @@
 ===============
 Draugiem Python
 ===============
-Draugiem ir python aplikācija darbībām ar  `draugiem.lv <http://www.draugiem.lv>`_ API un django aplikācija, lai veidotu draugiem.lv IFrame aplikācijas
+Draugiem ir python aplikācija  `draugiem.lv <http://www.draugiem.lv>`_ API
++ django aplikācija, lai veidotu draugiem.lv IFrame aplikācijas
 
 Instalācija
 ===============
@@ -15,7 +16,7 @@ Django integrācija
     `AUTHENTICATION_BACKENDS = ('draugiem_django.backend.DraugiemIntegratedBackend', )`
 #. pievienojam 
     `(r'^draugiem/', include('draugiem.django.urls')),`
-#. uzliekam http://www.domēns.lv/draugiem/login/ kā aplikācijas URL draugiem.lv 
+#. uzliekam http://www.domēns.lv/draugiem/login/ kā aplikācijas URL draugiem.lv. Mums ir autorizējies lietotājs.
 
 
 Licence
