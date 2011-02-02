@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from draugiem.django.api import api
+from draugiem.django import api
 from draugiem.api import APIError
 from signals import created
 from signals import authorized

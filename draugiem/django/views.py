@@ -22,5 +22,5 @@ def capture_url_parameters(request):
                 return render_to_response("draugiem/use_draugiem.html", 
                                             context)
             login(request, user)
-        return HttpResponseRedirect(settings.FIRST_PAGE)
+        return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
 
