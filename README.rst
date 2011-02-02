@@ -17,9 +17,6 @@ Django integrācija
     `(r'^draugiem/', include('draugiem.django.urls')),`
 #. uzliekam http://www.domēns.lv/draugiem/login/ kā aplikācijas URL draugiem.lv 
 
-Piezīmes
-========
- Bibliotēka ir izstrādes procesā, API var mainīties.
 
 Licence
 =======
